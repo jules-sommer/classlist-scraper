@@ -15,7 +15,7 @@
       perSystem = { config, self', pkgs, lib, system, ... }:
         let
           cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
-          nonRustDeps = with pkgs; [ libiconv openssl zlib gcc pkg-config ];
+          nonRustDeps = with pkgs; [ libiconv openssl zlib gcc pkg-config chromedriver geckodriver ];
           rust-toolchain = pkgs.symlinkJoin {
             name = "rust-toolchain";
             paths = [
@@ -41,7 +41,6 @@
               # For rust-analyzer 'hover' tooltips to work.
               export RUST_SRC_PATH=${pkgs.rustPlatform.rustLibSrc}
 
-              echo
               echo "🍎🍎 Run 'just <recipe>' to get started"
               just
             '';
